@@ -1,4 +1,4 @@
-# Fabkit
+# fabkit
 
 A lightweight UI toolkit and component library.
 
