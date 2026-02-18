@@ -1,6 +1,5 @@
 // Styles
-import "./style/vnt.css";
-import "./style/theme.scss";
+// (Removed direct CSS/SCSS imports to avoid SSR module errors)
 
 // Theme
 export { initTheme, getTheme, generateColorVariants } from "./theme.js";
