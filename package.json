@@ -1,6 +1,6 @@
 {
   "name": "fabkit",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && npm run prepack",
@@ -27,7 +27,6 @@
     ".": {
       "types": "./dist/index.d.ts",
       "svelte": "./dist/index.js",
-      "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
     "./EngineContext": {
