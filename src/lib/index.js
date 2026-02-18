@@ -46,6 +46,7 @@ export { default as TitleBar } from "./components/TitleBar.svelte";
 export { default as Window } from "./components/Window.svelte";
 export { default as Skeleton } from "./components/Skeleton.svelte";
 export { default as Text } from "./components/Text.svelte";
+export { default as EngineDecorator } from "./components/EngineDecorator.svelte";
 
 // Utils
 export { default as Engine } from "./Engine.js";

@@ -25,20 +25,25 @@
   "type": "module",
   "exports": {
     ".": {
-      "svelte": "./dist/index.js"
+      "types": "./dist/index.d.ts",
+      "svelte": "./dist/index.js",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./EngineContext": {
       "types": "./dist/EngineContext.d.ts",
+      "import": "./dist/EngineContext.js",
       "default": "./dist/EngineContext.js"
     },
     "./engines/Browser": {
       "types": "./dist/engines/Browser.d.ts",
+      "import": "./dist/engines/Browser.js",
       "default": "./dist/engines/Browser.js"
     },
     "./components/EngineDecorator.svelte": {
       "types": "./dist/components/EngineDecorator.svelte.d.ts",
-      "svelte": "./dist/components/EngineDecorator.svelte",
-      "default": "./dist/components/EngineDecorator.svelte"
+      "svelte": "./dist/components/EngineDecorator.svelte"
     }
   },
   "peerDependencies": {
