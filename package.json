@@ -1,0 +1,77 @@
+{
+  "name": "fabkit-lib",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build && npm run prepack",
+    "preview": "vite preview",
+    "prepare": "svelte-kit sync || echo ''",
+    "prepack": "svelte-kit sync && svelte-package && publint",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "examples": "pnpm --filter examples dev"
+  },
+  "files": [
+    "dist",
+    "!dist/**/*.test.*",
+    "!dist/**/*.spec.*"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "svelte": "./dist/index.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "svelte": "./dist/index.js"
+    },
+    "./EngineContext": {
+      "types": "./dist/EngineContext.d.ts",
+      "default": "./dist/EngineContext.js"
+    },
+    "./engines/Browser": {
+      "types": "./dist/engines/Browser.d.ts",
+      "default": "./dist/engines/Browser.js"
+    },
+    "./components/EngineDecorator.svelte": {
+      "types": "./dist/components/EngineDecorator.svelte.d.ts",
+      "svelte": "./dist/components/EngineDecorator.svelte",
+      "default": "./dist/components/EngineDecorator.svelte"
+    }
+  },
+  "peerDependencies": {
+    "svelte": "^5.0.0"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^4.1.3",
+    "@storybook/addon-a11y": "^10.1.7",
+    "@storybook/addon-docs": "^10.1.7",
+    "@storybook/addon-vitest": "^10.1.7",
+    "@storybook/svelte": "^10.1.7",
+    "@storybook/sveltekit": "^10.1.7",
+    "@sveltejs/adapter-auto": "^7.0.0",
+    "@sveltejs/kit": "^2.48.5",
+    "@sveltejs/package": "^2.5.6",
+    "@sveltejs/vite-plugin-svelte": "^6.2.1",
+    "@vitest/browser-playwright": "^4.0.15",
+    "@vitest/coverage-v8": "^4.0.15",
+    "playwright": "^1.57.0",
+    "publint": "^0.3.15",
+    "sass": "^1.96.0",
+    "storybook": "^10.1.7",
+    "svelte": "^5.43.8",
+    "svelte-check": "^4.3.4",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.2",
+    "vitest": "^4.0.15"
+  },
+  "keywords": [
+    "svelte"
+  ],
+  "dependencies": {
+    "@storybook/addon-svelte-csf": "^5.0.10",
+    "mitt": "^3.0.1"
+  }
+}

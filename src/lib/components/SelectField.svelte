@@ -1,0 +1,257 @@
+<script>
+  import Skeleton from "./Skeleton.svelte";
+  /**
+   * @typedef {object} Option
+   * @property {string} value
+   * @property {string} text
+   */
+
+  let {
+    value = $bindable(""),
+    label = "",
+    options = [],
+    icon = "",
+    iconPosition = "right",
+    class: className = "",
+    // Skeleton Props Pass-through
+    margin = [0, 0, 0, 0],
+    padding,
+    bg,
+    bgHover,
+    bgFocus,
+    bgActive,
+    borderWidth,
+    borderWidthHover,
+    borderWidthFocus,
+    borderWidthActive,
+    borderColor,
+    borderStyle = "solid",
+    borderRadius,
+    shadow = "none",
+    zIndex = 0,
+    ref = $bindable(),
+    ...rest
+  } = $props();
+
+  let isOpen = $state(false);
+  let displayText = $derived(
+    options.find((option) => option.value === value)?.text ?? "",
+  );
+  let hasContent = $derived(displayText.toString().length > 0);
+
+  function toggleDropdown() {
+    isOpen = !isOpen;
+  }
+
+  /**
+   * @param {Option} option
+   */
+  function selectOption(option) {
+    value = option.value;
+    isOpen = false;
+  }
+
+  /**
+   * @param {MouseEvent} event
+   */
+  function handleClickOutside(event) {
+    if (ref && !ref.contains(event.target)) {
+      isOpen = false;
+    }
+  }
+
+  $effect(() => {
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  });
+
+  const finalPadding = $derived(
+    padding !== undefined
+      ? padding
+      : iconPosition === "left" && !isOpen && !hasContent
+        ? [8, 0, 8, 34]
+        : [8, 0, 8, 0],
+  );
+
+  const finalBg = $derived(bg !== undefined ? bg : "transparent");
+  const finalBorderRadius = $derived(
+    borderRadius !== undefined ? borderRadius : [0, 0, 0, 0],
+  );
+  const finalBorderColor = $derived(
+    borderColor !== undefined ? borderColor : "transparent",
+  );
+</script>
+
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<Skeleton
+  class="SelectField {className}"
+  onclick={toggleDropdown}
+  bind:ref
+  {margin}
+  padding={finalPadding}
+  bg={finalBg}
+  {bgHover}
+  {bgFocus}
+  {bgActive}
+  {borderWidth}
+  {borderWidthHover}
+  {borderWidthFocus}
+  {borderWidthActive}
+  borderColor={finalBorderColor}
+  {borderStyle}
+  borderRadius={finalBorderRadius}
+  {shadow}
+  {zIndex}
+  {...rest}
+>
+  <!-- svelte-ignore a11y_label_has_associated_control -->
+  <label
+    class="SelectField-label"
+    class:SelectField-label--active={isOpen || hasContent}
+  >
+    {label}
+  </label>
+  <div
+    class="SelectField-display"
+    style:border-bottom-width={isOpen ? "2px" : "1px"}
+    style:border-bottom-color={isOpen
+      ? "var(--action-suggested)"
+      : "var(--border-tertiary)"}
+  >
+    {displayText}
+    <span class="mdi SelectField-expand-icon"
+      >{isOpen ? "expand_less" : "expand_more"}</span
+    >
+  </div>
+  {#if icon}
+    <div
+      class="SelectField-icon mdi"
+      class:SelectField-icon--left={iconPosition === "left"}
+      class:SelectField-icon--right={iconPosition === "right"}
+      class:SelectField-icon--active={isOpen || hasContent}
+    >
+      {icon}
+    </div>
+  {/if}
+  {#if isOpen}
+    <div class="SelectField-dropdown">
+      {#each options as option}
+        <div
+          class="SelectField-option"
+          onclick={(e) => {
+            e.stopPropagation();
+            selectOption(option);
+          }}
+        >
+          {option.text}
+        </div>
+      {/each}
+    </div>
+  {/if}
+</Skeleton>
+
+<style>
+  :global(.SelectField) {
+    position: relative;
+  }
+
+  .SelectField-display {
+    border: none;
+    border-bottom: 1px solid var(--border-tertiary);
+    font-size: 1rem;
+    padding: 8px 0;
+    background: transparent;
+    color: var(--text-primary);
+    outline: none;
+    line-height: normal;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 22px;
+  }
+
+  .SelectField-display:focus {
+    border-bottom: 2px solid var(--action-suggested);
+  }
+
+  .SelectField-label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--text-secondary);
+    pointer-events: none;
+    transition:
+      all 0.2s ease-out,
+      color 0.2s ease-out,
+      top 0.2s ease-out;
+    transform: translateY(10px);
+  }
+
+  .SelectField-label--active {
+    transform: translateY(-10px);
+    font-size: 0.85rem;
+  }
+
+  .SelectField-dropdown {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    width: calc(100% - 20px);
+    background-color: var(--background-base);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--snt-border-radius, 12px);
+    box-shadow: var(--shadow-elevated);
+    z-index: 10;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 10px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .SelectField-option {
+    padding: 10px 16px;
+    background-color: transparent;
+    border-radius: var(--snt-border-radius, 12px);
+    text-align: left;
+  }
+
+  .SelectField-option:hover {
+    background-color: var(--background-elevated-2-hover);
+  }
+
+  .SelectField-option:active {
+    background-color: var(--background-top);
+  }
+
+  .SelectField-icon {
+    text-align: left;
+  }
+
+  .SelectField-icon,
+  .SelectField-expand-icon {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .SelectField-icon--left {
+    left: 0;
+  }
+
+  .SelectField-icon--right {
+    right: 30px;
+  }
+
+  .SelectField-icon--active {
+    color: var(--action-suggested);
+  }
+
+  .SelectField-expand-icon {
+    right: 8px;
+  }
+</style>
