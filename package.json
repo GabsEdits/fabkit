@@ -72,6 +72,7 @@
   ],
   "dependencies": {
     "@storybook/addon-svelte-csf": "^5.0.10",
-    "mitt": "^3.0.1"
+    "mitt": "^3.0.1",
+    "fabkit": "git+ssh://git@github.com/fabricatorsltd/fabkit.git#main"
   }
 }
