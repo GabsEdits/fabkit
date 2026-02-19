@@ -68,9 +68,7 @@
       ? padding
       : contained
         ? [2, 10, 2, 10]
-        : iconPosition === "left" && !isActive && !hasContent
-          ? [8, 0, 8, 34]
-          : [8, 0, 8, 0],
+        : [8, 0, 8, 0],
   );
 
   const finalBg = $derived(
@@ -126,6 +124,8 @@
     <label
       class="BaseField-label"
       class:BaseField-label--active={isActive || hasContent}
+      class:BaseField-label--icon-left={icon && iconPosition === "left"}
+      class:BaseField-label--icon-right={icon && iconPosition === "right"}
     >
       {label}
     </label>
@@ -139,6 +139,8 @@
     onblur={handleBlur}
     onkeydown={rest.onkeydown}
     class="BaseField-input"
+    class:BaseField-input--icon-left={icon && iconPosition === "left"}
+    class:BaseField-input--icon-right={icon && iconPosition === "right"}
     style:border-bottom-width={flat || contained ? "0" : "1px"}
     readonly={readOnly}
     bind:this={inputElement}
@@ -183,15 +185,32 @@
     color: var(--text-secondary);
     pointer-events: none;
     transition:
-      all 0.2s ease-out,
+      transform 0.2s ease-out,
+      font-size 0.2s ease-out,
       color 0.2s ease-out,
-      top 0.2s ease-out;
+      left 0.2s ease-out;
     transform: translateY(10px);
   }
 
+  /* shift label right when icon is on the left and field is inactive */
+  .BaseField-label--icon-left {
+    left: 26px;
+  }
+
+  /* when active (focused or has content), label floats to top-left regardless of icon */
   .BaseField-label--active {
     transform: translateY(-15px);
     font-size: 0.85rem;
+    left: 0 !important;
+  }
+
+  /* input padding to avoid overlapping the icon */
+  .BaseField-input--icon-left {
+    padding-left: 26px;
+  }
+
+  .BaseField-input--icon-right {
+    padding-right: 26px;
   }
 
   .BaseField-icon {
