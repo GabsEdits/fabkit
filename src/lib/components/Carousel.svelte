@@ -1,6 +1,8 @@
 <script lang="ts">
   import Skeleton from "./Skeleton.svelte";
   import { onMount } from "svelte";
+  import PhCaretLeft from "../icons/components/CaretLeft.svelte";
+  import PhCaretRight from "../icons/components/CaretRight.svelte";
 
   let {
     children,
@@ -79,7 +81,7 @@
   <div class="Carousel-leftControl">
     {#if currentSlide > 0}
       <button onclick={prevSlide} aria-label="Previous Slide">
-        <span class="mdi">chevron_left</span>
+        <PhCaretLeft size={24} />
       </button>
     {/if}
   </div>
@@ -95,7 +97,7 @@
   <div class="Carousel-rightControl">
     {#if currentSlide < slideCount - 1}
       <button onclick={nextSlide} aria-label="Next Slide">
-        <span class="mdi">chevron_right</span>
+        <PhCaretRight size={24} />
       </button>
     {/if}
   </div>

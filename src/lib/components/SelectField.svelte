@@ -1,5 +1,7 @@
 <script>
   import Skeleton from "./Skeleton.svelte";
+  import PhCaretUp from "../icons/components/CaretUp.svelte";
+  import PhCaretDown from "../icons/components/CaretDown.svelte";
   /**
    * @typedef {object} Option
    * @property {string} value
@@ -122,18 +124,18 @@
       : "var(--border-tertiary)"}
   >
     {displayText}
-    <span class="mdi SelectField-expand-icon"
-      >{isOpen ? "expand_less" : "expand_more"}</span
-    >
+    <span class="SelectField-expand-icon">
+      {#if isOpen}<PhCaretUp size={16} />{:else}<PhCaretDown size={16} />{/if}
+    </span>
   </div>
   {#if icon}
     <div
-      class="SelectField-icon mdi"
+      class="SelectField-icon"
       class:SelectField-icon--left={iconPosition === "left"}
       class:SelectField-icon--right={iconPosition === "right"}
       class:SelectField-icon--active={isOpen || hasContent}
     >
-      {icon}
+      <svelte:component this={icon} size={18} />
     </div>
   {/if}
   {#if isOpen}

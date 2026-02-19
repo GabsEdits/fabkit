@@ -1,6 +1,9 @@
 <script>
   import Skeleton from "./Skeleton.svelte";
   import { getEngine } from "../EngineContext.js";
+  import PhMinus from "../icons/components/Minus.svelte";
+  import PhSquare from "../icons/components/Square.svelte";
+  import PhX from "../icons/components/X.svelte";
 
   const engineInstance = getEngine();
 
@@ -74,13 +77,13 @@
   </div>
   <div class="TitleBar-controls">
     <button class="TitleBar-controls-item" onclick={minimizeWindow}>
-      <span class="mdi">minimize</span>
+      <PhMinus size={16} />
     </button>
     <button class="TitleBar-controls-item" onclick={maximizeWindow}>
-      <span class="mdi">square</span>
+      <PhSquare size={16} />
     </button>
     <button class="TitleBar-controls-item" onclick={closeWindow}>
-      <span class="mdi">close</span>
+      <PhX size={16} />
     </button>
   </div>
 </Skeleton>
@@ -123,10 +126,6 @@
     border: none;
     background-color: transparent;
     border-radius: var(--snt-border-radius, 12px);
-  }
-
-  .TitleBar-controls-item .mdi {
-    font-size: 16px;
   }
 
   .TitleBar-controls-item:hover {

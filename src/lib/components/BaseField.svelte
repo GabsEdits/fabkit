@@ -145,12 +145,12 @@
   />
   {#if icon}
     <span
-      class="BaseField-icon mdi"
+      class="BaseField-icon"
       class:BaseField-icon--left={iconPosition === "left"}
       class:BaseField-icon--right={iconPosition === "right"}
       class:BaseField-icon--active={isActive || hasContent}
     >
-      {icon}
+      <svelte:component this={icon} size={18} />
     </span>
   {/if}
 </Skeleton>

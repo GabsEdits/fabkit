@@ -2,6 +2,8 @@
   import Skeleton from "./Skeleton.svelte";
   import { onMount } from "svelte";
   import EventBus from "../EventBus.js";
+  import PhPlus from "../icons/components/Plus.svelte";
+  import PhX from "../icons/components/X.svelte";
 
   /**
    * @typedef {object} Tab
@@ -229,7 +231,7 @@
   {#if allowNewTabs}
     <div class="TabsSwitcher-add">
       <button class="TabsSwitcher-add-button" onclick={createTab}>
-        <span class="mdi">add</span>
+        <PhPlus size={16} />
       </button>
     </div>
   {/if}
@@ -271,7 +273,7 @@
             title="Close tab"
             onclick={() => closeTab(tab.id)}
           >
-            <span class="mdi">close</span>
+            <PhX size={14} />
           </button>
         </div>
       </div>
@@ -366,10 +368,6 @@
     background-color: var(--background-elevated-2-hover);
   }
 
-  .TabsSwitcher-items-item-actions-item span.mdi {
-    font-size: 15px;
-  }
-
   .TabsSwitcher-items-item.TabsSwitcher-items-item--active {
     background-color: var(--background-top);
   }
@@ -420,9 +418,5 @@
 
   .TabsSwitcher-add-button:active {
     background-color: var(--background-top);
-  }
-
-  .TabsSwitcher-add-button span.mdi {
-    font-size: 20px;
   }
 </style>

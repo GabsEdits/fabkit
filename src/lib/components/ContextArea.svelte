@@ -1,13 +1,14 @@
 <script>
   import Skeleton from "./Skeleton.svelte";
   import { onMount } from "svelte";
+  import PhCaretRight from "../icons/components/CaretRight.svelte";
 
   /**
    * @typedef {object} ContextMenuItem
    * @property {number} id
    * @property {string} text
    * @property {string} shortcut
-   * @property {string} icon
+   * @property {any} icon - Svelte component or null
    * @property {() => void} action
    * @property {ContextMenuItem[]} submenu
    */
@@ -121,7 +122,7 @@
       <div class="ContextArea-menu-item" onclick={item.action}>
         <div class="ContextArea-menu-item-icon">
           {#if item.icon}
-            <span class="mdi">{item.icon}</span>
+            <svelte:component this={item.icon} size={16} />
           {:else}
             <span class="mdi-placeholder"></span>
           {/if}
@@ -132,7 +133,7 @@
         </div>
         {#if item.submenu && item.submenu.length > 0}
           <div class="ContextArea-menu-item-submenu">
-            <span class="mdi">chevron-right</span>
+            <PhCaretRight size={14} />
           </div>
         {/if}
       </div>
@@ -189,10 +190,17 @@
     justify-content: center;
   }
 
-  .ContextArea-menu-item-icon .mdi,
-  .ContextArea-menu-item-submenu .mdi,
-  .ContextArea-menu-item-submenu .mdi-placeholder {
+  .ContextArea-menu-item-icon,
+  .ContextArea-menu-item-submenu {
     font-size: 18px;
+    display: flex;
+    align-items: center;
+  }
+
+  .mdi-placeholder {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
   }
 
   .ContextArea-menu-item-text {
@@ -214,17 +222,5 @@
 
   .ContextArea-menu-item-submenu:hover {
     background-color: transparent;
-  }
-
-  .ContextArea-menu-item-submenu:hover .mdi {
-    color: var(--text-primary);
-  }
-
-  .ContextArea-menu-item-submenu:hover .mdi-placeholder {
-    color: var(--text-primary);
-  }
-
-  .ContextArea-menu-item-submenu .mdi-placeholder {
-    color: var(--text-secondary);
   }
 </style>

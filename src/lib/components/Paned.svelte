@@ -1,6 +1,8 @@
 <script>
   import Skeleton from "./Skeleton.svelte";
   import eventBus from "../EventBus.js";
+  import PhCaretLeft from "../icons/components/CaretLeft.svelte";
+  import PhCaretRight from "../icons/components/CaretRight.svelte";
 
   let {
     context,
@@ -129,9 +131,9 @@
   {#if minLeftReached}
     <button class="Paned-toggle" onclick={toggleLeftOverlay}>
       {#if overlayVisible}
-        <span class="mdi">chevron_left</span>
+        <PhCaretLeft size={20} />
       {:else}
-        <span class="mdi">chevron_right</span>
+        <PhCaretRight size={20} />
       {/if}
     </button>
   {/if}
@@ -221,10 +223,6 @@
 
   .Paned-toggle:active {
     background-color: var(--background-elevated-2);
-  }
-
-  .Paned-toggle .mdi {
-    font-size: 24px;
   }
 
   .Paned-divider {
