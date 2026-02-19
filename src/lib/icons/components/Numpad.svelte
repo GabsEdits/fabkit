@@ -1,0 +1,13 @@
+<script>
+  import Icon from '../Icon.svelte';
+  let { weight = 'regular', size = 24, color = 'currentColor', class: className = '', mirrored = false } = $props();
+  const paths = {
+    bold: `<circle cx="64" cy="48" r="20"/><circle cx="128" cy="48" r="20"/><circle cx="192" cy="48" r="20"/><circle cx="64" cy="104" r="20"/><circle cx="128" cy="104" r="20"/><circle cx="192" cy="104" r="20"/><circle cx="64" cy="160" r="20"/><circle cx="128" cy="160" r="20"/><circle cx="128" cy="216" r="20"/><circle cx="192" cy="160" r="20"/>`,
+    duotone: `<path d="M64,48H192a0,0,0,0,1,0,0V200a16,16,0,0,1-16,16H80a16,16,0,0,1-16-16V48A0,0,0,0,1,64,48Z" opacity="0.2"/><circle cx="64" cy="48" r="16"/><circle cx="128" cy="48" r="16"/><circle cx="192" cy="48" r="16"/><circle cx="64" cy="104" r="16"/><circle cx="128" cy="104" r="16"/><circle cx="192" cy="104" r="16"/><circle cx="64" cy="160" r="16"/><circle cx="128" cy="160" r="16"/><circle cx="128" cy="216" r="16"/><circle cx="192" cy="160" r="16"/>`,
+    fill: `<path d="M200,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V40A16,16,0,0,0,200,24ZM80,164a12,12,0,1,1,12-12A12,12,0,0,1,80,164Zm0-40a12,12,0,1,1,12-12A12,12,0,0,1,80,124Zm0-40A12,12,0,1,1,92,72,12,12,0,0,1,80,84Zm48,120a12,12,0,1,1,12-12A12,12,0,0,1,128,204Zm0-40a12,12,0,1,1,12-12A12,12,0,0,1,128,164Zm0-40a12,12,0,1,1,12-12A12,12,0,0,1,128,124Zm0-40a12,12,0,1,1,12-12A12,12,0,0,1,128,84Zm48,80a12,12,0,1,1,12-12A12,12,0,0,1,176,164Zm0-40a12,12,0,1,1,12-12A12,12,0,0,1,176,124Zm0-40a12,12,0,1,1,12-12A12,12,0,0,1,176,84Z"/>`,
+    light: `<circle cx="64" cy="48" r="14"/><circle cx="128" cy="48" r="14"/><circle cx="192" cy="48" r="14"/><circle cx="64" cy="104" r="14"/><circle cx="128" cy="104" r="14"/><circle cx="192" cy="104" r="14"/><circle cx="64" cy="160" r="14"/><circle cx="128" cy="160" r="14"/><circle cx="128" cy="216" r="14"/><circle cx="192" cy="160" r="14"/>`,
+    regular: `<circle cx="64" cy="48" r="16"/><circle cx="128" cy="48" r="16"/><circle cx="192" cy="48" r="16"/><circle cx="64" cy="104" r="16"/><circle cx="128" cy="104" r="16"/><circle cx="192" cy="104" r="16"/><circle cx="64" cy="160" r="16"/><circle cx="128" cy="160" r="16"/><circle cx="128" cy="216" r="16"/><circle cx="192" cy="160" r="16"/>`,
+    thin: `<circle cx="64" cy="48" r="12"/><circle cx="128" cy="48" r="12"/><circle cx="192" cy="48" r="12"/><circle cx="64" cy="104" r="12"/><circle cx="128" cy="104" r="12"/><circle cx="192" cy="104" r="12"/><circle cx="64" cy="160" r="12"/><circle cx="128" cy="160" r="12"/><circle cx="128" cy="216" r="12"/><circle cx="192" cy="160" r="12"/>`
+  };
+</script>
+<Icon {weight} {size} {color} class={className} {mirrored} {paths} />

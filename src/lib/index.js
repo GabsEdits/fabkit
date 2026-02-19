@@ -50,3 +50,7 @@ export { default as EngineDecorator } from "./components/EngineDecorator.svelte"
 // Utils
 export { default as Engine } from "./Engine.js";
 export { default as EventBus } from "./EventBus.js";
+
+// Icons
+export * from './icons/index.js';
+export { default as PhIcon } from './icons/Icon.svelte';

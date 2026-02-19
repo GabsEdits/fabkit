@@ -1,6 +1,6 @@
 {
   "name": "fabkit",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "scripts": {
     "build": "rollup -c",
     "prepublishOnly": "svelte-kit sync && svelte-package && rollup -c",
@@ -41,7 +41,7 @@
       "import": "./dist/engines/Browser.mjs",
       "default": "./dist/engines/Browser.js"
     }
-  }
+  },
   "peerDependencies": {
     "svelte": "^5.0.0"
   },
@@ -67,7 +67,7 @@
     "svelte-check": "^4.3.4",
     "typescript": "^5.9.3",
     "vitest": "^4.0.15"
-  }
+  },
   "keywords": [
     "svelte"
   ],
