@@ -273,7 +273,7 @@
             title="Close tab"
             onclick={() => closeTab(tab.id)}
           >
-            <PhX size={14} />
+            <PhX size={12} />
           </button>
         </div>
       </div>
@@ -354,14 +354,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     color: var(--text-primary);
     border: 0;
     background-color: transparent;
-    border-radius: 100%;
-    padding: 5px;
+    padding: 3px;
+    cursor: pointer;
   }
 
   .TabsSwitcher-items-item-actions-item:hover {

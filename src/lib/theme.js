@@ -129,6 +129,61 @@ function mergeWithDefaults(userTheme) {
 }
 
 /**
+ * Structural CSS vars for light mode
+ */
+const LIGHT_VARS = {
+  '--background-base': '#ffffff',
+  '--background-elevated': '#f5f5f5',
+  '--background-elevated-2': '#e7e7e7',
+  '--background-elevated-2-hover': '#e1e1e1',
+  '--background-top': '#d8d8d8',
+  '--background-translucent': 'rgba(255,255,255,0.65)',
+  '--shadow-base': 'none',
+  '--shadow-elevated': '0 2px 4px rgba(0,0,0,0.1)',
+  '--shadow-elevated-2': '0 2px 4px rgba(0,0,0,0.041)',
+  '--shadow-top': '0 0 10px rgba(0,0,0,0.2)',
+  '--text-primary': '#000000',
+  '--text-primary-alt': '#ffffff',
+  '--text-secondary': '#666666',
+  '--border-primary': '#e4e4e4',
+  '--border-secondary': '#f8f8f8',
+  '--border-tertiary': '#c7c7c7',
+  '--action-destructive': '#dc3545',
+  '--action-destructive-hover': '#bd2130',
+  '--action-destructive-active': '#991724',
+  '--action-destructive-disabled': '#f0c2c2',
+  '--scrollbar-thumb': '#cfcfcf',
+  '--scrollbar-thumb-hover': '#aaa',
+  '--snt-border-radius': '12px',
+};
+
+const DARK_VARS = {
+  '--background-base': '#202020',
+  '--background-elevated': '#353535',
+  '--background-elevated-2': '#272727',
+  '--background-elevated-2-hover': '#3c3c3c',
+  '--background-top': '#424242',
+  '--background-translucent': 'rgba(36,36,36,0.65)',
+  '--shadow-base': 'none',
+  '--shadow-elevated': '0 2px 4px rgba(0,0,0,0.1)',
+  '--shadow-elevated-2': '0 2px 4px rgba(0,0,0,0.041)',
+  '--shadow-top': '0 0 10px rgba(0,0,0,0.3)',
+  '--text-primary': '#ffffff',
+  '--text-primary-alt': '#000000',
+  '--text-secondary': '#cccccc',
+  '--border-primary': '#3c3c3c',
+  '--border-secondary': '#2c2c2c',
+  '--border-tertiary': '#4c4c4c',
+  '--action-destructive': '#dc3545',
+  '--action-destructive-hover': '#bd2130',
+  '--action-destructive-active': '#991724',
+  '--action-destructive-disabled': '#4b3838',
+  '--scrollbar-thumb': '#3f3f3f',
+  '--scrollbar-thumb-hover': '#555',
+  '--snt-border-radius': '12px',
+};
+
+/**
  * Apply theme to document root as CSS variables
  * @param {import('./theme.d.js').BrandTheme} theme 
  */
@@ -136,35 +191,60 @@ function applyThemeToRoot(theme) {
   if (typeof document === 'undefined') return;
   
   const root = document.documentElement;
+
+  // Detect dark mode preference
+  const isDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches
+    || root.classList.contains('dark');
+  const structVars = isDark ? DARK_VARS : LIGHT_VARS;
+
+  // Apply structural vars (only if not already set by external CSS)
+  for (const [k, v] of Object.entries(structVars)) {
+    if (!root.style.getPropertyValue(k)) {
+      root.style.setProperty(k, v);
+    }
+  }
+
+  // Border radius from theme dimensions
+  root.style.setProperty('--snt-border-radius', `${theme.dimensions.borderRadius}px`);
   
   // Fonts
   root.style.setProperty('--fabkit-font-primary', theme.fonts.primary);
   root.style.setProperty('--fabkit-font-secondary', theme.fonts.secondary || theme.fonts.primary);
   root.style.setProperty('--fabkit-font-mono', theme.fonts.mono || 'monospace');
+  root.style.setProperty('font-family', theme.fonts.primary);
+  root.style.setProperty('font-size', `${theme.dimensions.fontSize}px`);
   
-  // Dimensions
-  root.style.setProperty('--fabkit-border-radius', `${theme.dimensions.borderRadius}px`);
-  root.style.setProperty('--fabkit-spacing', `${theme.dimensions.spacing}px`);
-  root.style.setProperty('--fabkit-font-size', `${theme.dimensions.fontSize}px`);
-  
-  // Apply all colors dynamically
-  Object.keys(theme.colors).forEach(key => {
-    const value = theme.colors[key];
-    const cssVarName = `--fabkit-color-${key}`;
-    root.style.setProperty(cssVarName, value);
-    
-    // Generate automated variants for primary/secondary ONLY to preserve current behavior
-    // If we wanted variants for EVERYTHING we would do it here, but let's stick to safe
-    if (key === 'primary') {
-      root.style.setProperty('--fabkit-color-primary-hover', theme.colors.primaryHover || theme.colors.primary);
-      root.style.setProperty('--fabkit-color-primary-active', theme.colors.primaryActive || theme.colors.primary);
-      root.style.setProperty('--fabkit-color-primary-disabled', theme.colors.primaryDisabled || theme.colors.primary);
-    } else if (key === 'secondary') {
-      root.style.setProperty('--fabkit-color-secondary-hover', theme.colors.secondaryHover || theme.colors.secondary);
-      root.style.setProperty('--fabkit-color-secondary-active', theme.colors.secondaryActive || theme.colors.secondary);
-      root.style.setProperty('--fabkit-color-secondary-disabled', theme.colors.secondaryDisabled || theme.colors.secondary);
-    }
-  });
+  // Brand colors — both --fabkit-color- and --snt-color- for compat
+  const primary = theme.colors.primary;
+  const primaryHover = theme.colors.primaryHover || primary;
+  const primaryActive = theme.colors.primaryActive || primary;
+  const primaryDisabled = theme.colors.primaryDisabled || primary;
+
+  root.style.setProperty('--fabkit-color-primary', primary);
+  root.style.setProperty('--fabkit-color-primary-hover', primaryHover);
+  root.style.setProperty('--fabkit-color-primary-active', primaryActive);
+  root.style.setProperty('--fabkit-color-primary-disabled', primaryDisabled);
+
+  // Legacy snt- aliases used in action-suggested and some components
+  root.style.setProperty('--snt-color-primary', primary);
+  root.style.setProperty('--snt-color-primary-hover', primaryHover);
+  root.style.setProperty('--snt-color-primary-active', primaryActive);
+  root.style.setProperty('--snt-color-primary-disabled', primaryDisabled);
+
+  // action-suggested resolves to brand primary
+  root.style.setProperty('--action-suggested', primary);
+  root.style.setProperty('--action-suggested-hover', primaryHover);
+  root.style.setProperty('--action-suggested-active', primaryActive);
+  root.style.setProperty('--action-suggested-disabled', primaryDisabled);
+
+  // Secondary color if provided
+  if (theme.colors.secondary) {
+    root.style.setProperty('--fabkit-color-secondary', theme.colors.secondary);
+    root.style.setProperty('--snt-color-secondary', theme.colors.secondary);
+    root.style.setProperty('--fabkit-color-secondary-hover', theme.colors.secondaryHover || theme.colors.secondary);
+    root.style.setProperty('--fabkit-color-secondary-active', theme.colors.secondaryActive || theme.colors.secondary);
+    root.style.setProperty('--fabkit-color-secondary-disabled', theme.colors.secondaryDisabled || theme.colors.secondary);
+  }
 }
 
 /** @type {import('./theme.d.js').BrandTheme | null} */
