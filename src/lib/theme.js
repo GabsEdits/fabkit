@@ -192,9 +192,9 @@ function applyThemeToRoot(theme) {
   
   const root = document.documentElement;
 
-  // Detect dark mode preference
-  const isDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches
-    || root.classList.contains('dark');
+  // Detect dark mode: only explicit .dark class on <html>, never prefers-color-scheme
+  // (let the OS preference be handled separately if desired)
+  const isDark = root.classList.contains('dark');
   const structVars = isDark ? DARK_VARS : LIGHT_VARS;
 
   // Apply structural vars (only if not already set by external CSS)
