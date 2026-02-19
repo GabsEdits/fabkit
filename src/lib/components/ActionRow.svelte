@@ -29,8 +29,7 @@
 </script>
 
 <Skeleton
-  class="ActionRow {className}"
-  class:ActionRow--activatable={activatable}
+  class="ActionRow {activatable ? 'ActionRow--activatable' : ''} {className}"
   bind:ref
   {margin}
   {padding}
