@@ -47,6 +47,8 @@ export { default as Skeleton } from "./components/Skeleton.svelte";
 export { default as Text } from "./components/Text.svelte";
 export { default as EngineDecorator } from "./components/EngineDecorator.svelte";
 
+export { default as Image } from "./components/Image.svelte";
+
 // Utils
 export { default as Engine } from "./Engine.js";
 export { default as EventBus } from "./EventBus.js";
