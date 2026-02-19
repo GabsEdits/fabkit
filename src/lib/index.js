@@ -49,6 +49,30 @@ export { default as EngineDecorator } from "./components/EngineDecorator.svelte"
 
 export { default as Image } from "./components/Image.svelte";
 
+// New components
+export { default as TextArea } from "./components/TextArea.svelte";
+export { default as NumberField } from "./components/NumberField.svelte";
+export { default as Checkbox } from "./components/Checkbox.svelte";
+export { default as RadioGroup } from "./components/RadioGroup.svelte";
+export { default as TagsInput } from "./components/TagsInput.svelte";
+export { default as ColorPicker } from "./components/ColorPicker.svelte";
+export { default as SearchField } from "./components/SearchField.svelte";
+export { default as FileChooser } from "./components/FileChooser.svelte";
+export { default as Separator } from "./components/Separator.svelte";
+export { default as Accordion } from "./components/Accordion.svelte";
+export { default as AccordionItem } from "./components/AccordionItem.svelte";
+export { default as Tooltip } from "./components/Tooltip.svelte";
+export { default as Chip } from "./components/Chip.svelte";
+export { default as DataTable } from "./components/DataTable.svelte";
+export { default as Kbd } from "./components/Kbd.svelte";
+export { default as ActionRow } from "./components/ActionRow.svelte";
+export { default as PreferencesGroup } from "./components/PreferencesGroup.svelte";
+export { default as PreferencesPage } from "./components/PreferencesPage.svelte";
+export { default as EntryRow } from "./components/EntryRow.svelte";
+export { default as SwitchRow } from "./components/SwitchRow.svelte";
+export { default as SpinRow } from "./components/SpinRow.svelte";
+export { default as LevelBar } from "./components/LevelBar.svelte";
+
 // Utils
 export { default as Engine } from "./Engine.js";
 export { default as EventBus } from "./EventBus.js";
