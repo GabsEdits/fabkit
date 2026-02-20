@@ -1,5 +1,6 @@
 <script>
-  import {Skeleton, MenuItem} from "./Skeleton.svelte";
+  import Skeleton from "./Skeleton.svelte";
+  import MenuItem from "./MenuItem.svelte";
   let {
     items = [],
     children,
