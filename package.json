@@ -11,6 +11,7 @@
   },
   "files": [
     "dist",
+    "types",
     "!dist/**/*.test.*",
     "src/lib/components",
     "src/lib",
@@ -24,20 +25,21 @@
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
+  "types": "./types/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./types/index.d.ts",
       "svelte": "./src/lib/index.js",
       "import": "./dist/index.mjs",
       "default": "./dist/index.js"
     },
     "./EngineContext": {
-      "types": "./dist/EngineContext.d.ts",
+      "types": "./types/EngineContext.d.ts",
       "import": "./dist/EngineContext.mjs",
       "default": "./dist/EngineContext.js"
     },
     "./engines/Browser": {
-      "types": "./dist/engines/Browser.d.ts",
+      "types": "./types/engines/Browser.d.ts",
       "import": "./dist/engines/Browser.mjs",
       "default": "./dist/engines/Browser.js"
     }
