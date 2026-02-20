@@ -5,11 +5,17 @@
   import PhSquare from "../icons/components/Square.svelte";
   import PhX from "../icons/components/X.svelte";
 
-  const engineInstance = getEngine();
+  let engineInstance = null;
+  try {
+    engineInstance = getEngine();
+  } catch {
+    engineInstance = null;
+  }
 
   let {
     area,
     class: className = "",
+    showWindowControls = engineInstance !== null && engineInstance !== undefined,
     // Skeleton Props Pass-through
     margin = [0, 0, 0, 0],
     padding,
@@ -75,17 +81,19 @@
   <div class="TitleBar-area" data-tauri-drag-region>
     {@render area?.()}
   </div>
-  <div class="TitleBar-controls">
-    <button class="TitleBar-controls-item" onclick={minimizeWindow}>
-      <PhMinus size={16} />
-    </button>
-    <button class="TitleBar-controls-item" onclick={maximizeWindow}>
-      <PhSquare size={16} />
-    </button>
-    <button class="TitleBar-controls-item" onclick={closeWindow}>
-      <PhX size={16} />
-    </button>
-  </div>
+  {#if showWindowControls}
+    <div class="TitleBar-controls">
+      <button class="TitleBar-controls-item" onclick={minimizeWindow}>
+        <PhMinus size={16} />
+      </button>
+      <button class="TitleBar-controls-item" onclick={maximizeWindow}>
+        <PhSquare size={16} />
+      </button>
+      <button class="TitleBar-controls-item" onclick={closeWindow}>
+        <PhX size={16} />
+      </button>
+    </div>
+  {/if}
 </Skeleton>
 
 <style>
