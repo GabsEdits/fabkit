@@ -155,8 +155,12 @@
   {#if children}
     {@render children()}
   {:else}
-    {#if typeof icon === "function"}
-      {@render icon()}
+    {#if icon}
+      {#if typeof icon === "function" && icon.length <= 1}
+        {@render icon()}
+      {:else}
+        <svelte:component this={icon} />
+      {/if}
     {/if}
     {#if label}
       <span class="Button-label">{label}</span>
