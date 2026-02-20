@@ -12,6 +12,7 @@ export { default as Card } from "./components/Card.svelte";
 export { default as Dialog } from "./components/Dialog.svelte";
 export { default as Grid } from "./components/Grid.svelte";
 export { default as HBox } from "./components/HBox.svelte";
+export { default as Wrapper } from "./components/Wrapper.svelte";
 import MenuComponent from "./components/Menu.svelte";
 import MenuItem from "./components/MenuItem.svelte";
 const Menu = MenuComponent;

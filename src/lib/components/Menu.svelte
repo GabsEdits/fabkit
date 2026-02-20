@@ -54,9 +54,11 @@
       {@render children()}
     {:else}
       {#each items as item}
-        <div class="Menu-item" onclick={item.action}>
-          <span class="Menu-item-label">{item.label}</span>
-        </div>
+        <MenuItem
+          label={item.label}
+          action={item.action}
+          href={item.link || item.href}
+        />
       {/each}
     {/if}
   </div>

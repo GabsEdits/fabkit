@@ -23,11 +23,11 @@
     bgHover,
     bgFocus,
     bgActive,
-    borderWidth = [0, 0, 0, 0],
+    borderWidth = [0, 0, 1, 0],
     borderWidthHover,
     borderWidthFocus,
     borderWidthActive,
-    borderColor = "transparent",
+    borderColor = "var(--border-primary)",
     borderStyle = "solid",
     borderRadius = [0, 0, 0, 0],
     shadow = "none",
@@ -59,7 +59,7 @@
 </script>
 
 <Skeleton
-  class="TitleBar {className} {area ? 'TitleBar--flat' : ''}"
+  class="TitleBar {className}"
   bind:ref
   {margin}
   padding={finalPadding}
@@ -101,13 +101,15 @@
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    height: 48px;
-    color: var(--text-primary-alt);
+    height: auto !important;
+    min-height: 48px !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 100 !important;
+    backdrop-filter: blur(16px);
+    background-color: var(--background-translucent);
+    color: var(--text-primary);
     user-select: none;
-  }
-
-  :global(.TitleBar.TitleBar--flat) {
-    height: 32px;
   }
 
   .TitleBar-area {

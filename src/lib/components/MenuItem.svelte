@@ -21,9 +21,13 @@
     borderRadius,
     shadow = "none",
     zIndex = 0,
+    href,
+    target,
     ref = $bindable(),
     ...rest
   } = $props();
+
+  const element = $derived(href ? "a" : "div");
 
   function handleClick() {
     if (action) action();
@@ -50,7 +54,11 @@
 <Skeleton
   class="Menu-item {className}"
   bind:ref
+  {element}
+  {href}
+  {target}
   onclick={handleClick}
+  style="text-decoration: none;"
   {margin}
   padding={finalPadding}
   {bg}
@@ -85,5 +93,6 @@
 
   .Menu-item-label {
     flex-grow: 1;
+    color: var(--text-primary);
   }
 </style>

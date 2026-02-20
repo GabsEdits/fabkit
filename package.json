@@ -1,6 +1,6 @@
 {
   "name": "fabkit",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "scripts": {
     "build": "rollup -c",
     "prepublishOnly": "svelte-kit sync && svelte-package && rollup -c",
