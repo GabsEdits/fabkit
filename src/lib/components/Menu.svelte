@@ -1,5 +1,5 @@
 <script>
-  import Skeleton from "./Skeleton.svelte";
+  import {Skeleton, MenuItem} from "./Skeleton.svelte";
   let {
     items = [],
     children,
