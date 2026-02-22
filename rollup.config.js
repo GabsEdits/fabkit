@@ -10,8 +10,10 @@ export default {
   ],
   plugins: [
     svelte({
+      emitCss: false,
       compilerOptions: {
-        dev: false
+        dev: false,
+        css: "injected"
       }
     }),
     resolve({ browser: true, dedupe: ['svelte'] }),

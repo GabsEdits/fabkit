@@ -1,6 +1,10 @@
 <script>
   import { fade } from "svelte/transition";
-  import { Card, VBox, HBox, Button, TextRich } from "fabkit";
+  import Card from "./Card.svelte";
+  import VBox from "./VBox.svelte";
+  import HBox from "./HBox.svelte";
+  import Button from "./Button.svelte";
+  import TextRich from "./TextRich.svelte";
 
   let {
     children,
