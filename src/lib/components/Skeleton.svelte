@@ -210,8 +210,9 @@
     color: var(--snt-color-hover) !important;
   }
 
-  .snt-skeleton:focus-within,
-  .snt-skeleton:focus {
+  /* Show focus styles only for keyboard (and similar) navigation */
+  .snt-skeleton:focus-visible,
+  .snt-skeleton:focus-within:has(:focus-visible) {
     background-color: var(--snt-bg-focus) !important;
     border-width: var(--snt-bw-focus) !important;
     border-color: var(--snt-bc-focus) !important;
