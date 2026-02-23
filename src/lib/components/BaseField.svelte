@@ -39,6 +39,9 @@
 
   let isActive = $state(false);
   let hasContent = $derived(value.toString().length > 0);
+  let isDateLike = $derived(
+    ["date", "time", "datetime-local", "month", "week"].includes(type),
+  );
   let inputElement = $state();
 
   function focusInput() {
@@ -123,7 +126,7 @@
     <!-- svelte-ignore a11y_label_has_associated_control -->
     <label
       class="BaseField-label"
-      class:BaseField-label--active={isActive || hasContent}
+      class:BaseField-label--active={isDateLike || isActive || hasContent}
       class:BaseField-label--icon-left={icon && iconPosition === "left"}
       class:BaseField-label--icon-right={icon && iconPosition === "right"}
     >
@@ -132,7 +135,7 @@
   {/if}
   <input
     {type}
-    placeholder={label ? (isActive ? placeholder : "") : placeholder}
+    placeholder={label ? (isDateLike || isActive ? placeholder : "") : placeholder}
     {value}
     oninput={handleInput}
     onfocus={handleFocus}
@@ -150,7 +153,7 @@
       class="BaseField-icon"
       class:BaseField-icon--left={iconPosition === "left"}
       class:BaseField-icon--right={iconPosition === "right"}
-      class:BaseField-icon--active={isActive || hasContent}
+      class:BaseField-icon--active={isDateLike || isActive || hasContent}
     >
       <svelte:component this={icon} size={18} />
     </span>
