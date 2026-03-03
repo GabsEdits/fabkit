@@ -30,7 +30,7 @@
     borderStyle = "solid",
     borderRadius,
     shadow = "none",
-    zIndex = 0,
+    zIndex = "auto",
     ref = $bindable(),
     ...rest
   } = $props();
@@ -68,6 +68,10 @@
       document.removeEventListener("click", handleClickOutside);
     };
   });
+
+  let dropdownZIndex = $derived(
+    typeof zIndex === "number" ? zIndex + 1 : 1000,
+  );
 
   const finalPadding = $derived(
     padding !== undefined
@@ -139,7 +143,7 @@
     </div>
   {/if}
   {#if isOpen}
-    <div class="SelectField-dropdown">
+    <div class="SelectField-dropdown" style:z-index={dropdownZIndex}>
       {#each options as option}
         <div
           class="SelectField-option"
@@ -206,7 +210,7 @@
     border: 1px solid var(--border-primary);
     border-radius: var(--snt-border-radius, 12px);
     box-shadow: var(--shadow-elevated);
-    z-index: 10;
+    z-index: 1000;
     max-height: 200px;
     overflow-y: auto;
     padding: 10px;
