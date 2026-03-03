@@ -14,6 +14,7 @@
     options = [],
     icon = "",
     iconPosition = "right",
+    flat = false,
     class: className = "",
     // Skeleton Props Pass-through
     margin = [0, 0, 0, 0],
@@ -118,10 +119,12 @@
   </label>
   <div
     class="SelectField-display"
-    style:border-bottom-width={isOpen ? "2px" : "1px"}
-    style:border-bottom-color={isOpen
-      ? "var(--action-suggested)"
-      : "var(--border-tertiary)"}
+    style:border-bottom-width={flat ? "0" : isOpen ? "2px" : "1px"}
+    style:border-bottom-color={flat
+      ? "transparent"
+      : isOpen
+        ? "var(--action-suggested)"
+        : "var(--border-tertiary)"}
   >
     {displayText}
     <span class="SelectField-expand-icon">
