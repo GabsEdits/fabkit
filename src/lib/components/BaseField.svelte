@@ -144,6 +144,7 @@
     class="BaseField-input"
     class:BaseField-input--icon-left={icon && iconPosition === "left"}
     class:BaseField-input--icon-right={icon && iconPosition === "right"}
+    class:BaseField-input--flat={flat || contained}
     style:border-bottom-width={flat || contained ? "0" : "1px"}
     readonly={readOnly}
     bind:this={inputElement}
@@ -177,7 +178,7 @@
     line-height: normal;
   }
 
-  .BaseField-input:focus {
+  .BaseField-input:focus:not(.BaseField-input--flat) {
     border-bottom: 2px solid var(--action-suggested);
   }
 
