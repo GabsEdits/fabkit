@@ -13,7 +13,9 @@
 </script>
 
 <div class="PopOverWrapper" bind:this={ref}>
-  <Button label="Click me" onclick={togglePopover} bind:ref={buttonElement} />
+  <slot name="trigger">
+    <Button label="Click me" onclick={togglePopover} bind:ref={buttonElement} />
+  </slot>
 
   {#if showPopover && buttonElement}
     <PopOver
@@ -21,7 +23,9 @@
       onclose={() => (showPopover = false)}
       {...props}
     >
-      {@render children?.()}
+      <slot>
+        {@render children?.()}
+      </slot>
     </PopOver>
   {/if}
 </div>

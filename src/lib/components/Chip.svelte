@@ -1,6 +1,9 @@
 <script>
   import Skeleton from "./Skeleton.svelte";
   import PhX from "../icons/components/X.svelte";
+import { createEventDispatcher } from "svelte";
+
+const dispatch = createEventDispatcher();
 
   let {
     label = "",
@@ -28,6 +31,11 @@
   } = $props();
 
   const finalBg = $derived(bg !== undefined ? bg : color || "var(--background-elevated)");
+
+function handleRemove(event) {
+    if (onRemove) onRemove(event);
+    dispatch('remove', { originalEvent: event });
+  }
 </script>
 
 <Skeleton
@@ -60,7 +68,7 @@
     <!-- svelte-ignore a11y_consider_explicit_label -->
     <button
       class="Chip-remove"
-      onclick={onRemove}
+      onclick={handleRemove}
       type="button"
     >
       <PhX size={12} />
