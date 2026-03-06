@@ -3,3 +3,4 @@ dist/
 node_modules/
 docs/notes
 .idea
+.DS_Store
